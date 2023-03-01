@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import logo from "./assets/logo.png"
+import Perguntas from "./Perguntas";
+import cards from "./cards";
 
 export default function Main() {
 
@@ -11,8 +13,14 @@ export default function Main() {
                 <img src={logo} alt="logo" />
                 <p>ZapRecall</p>
             </Header>
+                
+            <Corpo>
 
-            <Corpo></Corpo>
+            {cards.map((card, index)=>(
+            <Perguntas cards={card}/>
+            
+            ))}
+            </Corpo>
 
             <Footer><p>0/4 CONCLUÍDAS</p></Footer>
         </Total>
@@ -28,6 +36,7 @@ height: 60px;
 background-color: blue;
 margin-top: 42px;
 display:flex;
+margin-bottom:25px;
 
 >p{
     color: white;
@@ -50,13 +59,9 @@ img{
 
 const Corpo = styled.div`
 background-color: red;
-
 height: 600px;
+overflow-y: scroll;
 
-.pergunta{
-    width:300px;
-    height: 60px;
-}
 
 `;
 
@@ -65,11 +70,10 @@ const Total = styled.div`
 
 margin: auto;
 width: 375px;
-
-
 background: #FB6B6B;
-border: 1px solid #DBDBDB;
+border: 1px solid #DBDBDB
 `
+
 
 const Footer = styled.div`
 display:flex;
