@@ -12,20 +12,29 @@ import icone_quase from "./assets/icone_quase.png"
 export default function Perguntas(props, index) {
 
 	const { perguntaIndex } = props
-
+	const [botaoNaoClicado, setbotaoNaoClicado] = useState('')
 	const [botaoClicado, setBotaoClicado] = useState(false)
 	const [icone, setIcone] = useState(seta_play)
 
-
+function fazerQuestao(){
+	const botaoStatus = (botaoClicado || botaoNaoClicado)
+        if (botaoStatus) {
+            return
+        }
+		botaoClicado ? setBotaoClicado(false) : setBotaoClicado(true);
+}
 
 	return (
 
-		<Pergunta>
-			<Inicio>
+		<Pergunta botaoClicado={botaoClicado}>
+			<Inicio botaoClicado={botaoClicado}>
 				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : `blaubau`}
 			</Inicio>
 
-			<ImagemInicial> <img src={icone} alt="imagem" /> </ImagemInicial>
+			<ImagemInicial 
+			   botaoClicado={botaoClicado} > <img src={icone} alt="imagem" onClick={fazerQuestao}/> 
+				
+				</ImagemInicial>
 		</Pergunta>
 
 
@@ -41,7 +50,7 @@ display:flex;
 margin:auto;
 	margin-bottom: 25px;
     width:300px;
-    height:${props => props.botaoClicado ? "135px" : "65px;"};
+    height:${props => props.botaoClicado ? "131px" : "65px;"};
 	background-color:white;
 	font-size: 20px;
 	font-weight: 700;

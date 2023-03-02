@@ -87,6 +87,7 @@ height: 70px;
 background: #FFFFFF;
 box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 position:fixed;
+background-color: yellow;
 
 p{
     font-family: 'Recursive';
