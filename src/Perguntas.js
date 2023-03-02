@@ -1,14 +1,16 @@
 import styled from "styled-components";
+import seta_play from "./assets/seta_play.png"
 
 
 
 
 export default function Perguntas (props, index){
 
-
+const {perguntaIndex} = props
     return (
         <Pergunta>
-			<p>Pergunta</p>
+			pergunta 0{perguntaIndex} 
+			
 		</Pergunta>
 
     )
@@ -21,10 +23,6 @@ margin:auto;
     width:300px;
     height:65px;
 	background-color:white;
-
-
-	p{
-		
-	}
+	font-size: 20px;
 
 `

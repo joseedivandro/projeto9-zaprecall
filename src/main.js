@@ -17,7 +17,8 @@ export default function Main() {
             <Corpo>
 
             {cards.map((card, index)=>(
-            <Perguntas cards={card}/>
+            <Perguntas cards={card}
+                perguntaIndex={index+1}/>
             
             ))}
             </Corpo>
