@@ -13,14 +13,14 @@ export default function Main() {
                 <img src={logo} alt="logo" />
                 <p>ZapRecall</p>
             </Header>
-                
+
             <Corpo>
 
-            {cards.map((card, index)=>(
-            <Perguntas cards={card}
-                perguntaIndex={index+1}/>
-            
-            ))}
+                {cards.map((card, index) => (
+                    <Perguntas cards={card}
+                        perguntaIndex={index + 1} />
+
+                ))}
             </Corpo>
 
             <Footer><p>0/4 CONCLUÍDAS</p></Footer>
@@ -73,10 +73,12 @@ margin: auto;
 width: 375px;
 background: #FB6B6B;
 border: 1px solid #DBDBDB
+height: 667px;
 `
 
 
 const Footer = styled.div`
+
 display:flex;
 justify-content: center;
     align-items: center;
@@ -84,6 +86,7 @@ width: 375px;
 height: 70px;
 background: #FFFFFF;
 box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+position:fixed;
 
 p{
     font-family: 'Recursive';
