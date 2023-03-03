@@ -3,8 +3,7 @@ import logo from "./assets/logo.png"
 import Perguntas from "./Perguntas";
 import cards from "./cards";
 
-export default function Main() {
-
+export default function Main(props) {
 
 
     return (
@@ -16,15 +15,22 @@ export default function Main() {
 
             <Corpo>
 
-                {cards.map((card, index) => (
-                    <Perguntas cards={card}
-                        perguntaIndex={index + 1} />
+                {cards.map((cards , index) => (
+                    <Perguntas
+                        cards={cards}
+                        perguntaIndex={index + 1}
+                        tamanhoCards={cards.length}
+                    />
 
                 ))}
             </Corpo>
 
-            <Footer><p>0/4 CONCLUÍDAS</p></Footer>
+            <Footer>
+                <p>  0/{cards.length} CONCLUÍDAS</p>
+            </Footer>
         </Total>
+
+
     );
 }
 

@@ -9,32 +9,48 @@ import icone_quase from "./assets/icone_quase.png"
 
 
 
-export default function Perguntas(props, index) {
+export default function Perguntas(props) {
 
-	const { perguntaIndex } = props
+	const { perguntaIndex, cards} = props
 	const [botaoNaoClicado, setbotaoNaoClicado] = useState('')
 	const [botaoClicado, setBotaoClicado] = useState(false)
 	const [icone, setIcone] = useState(seta_play)
+	const [questaoVirada, setQuestaoVirada] = useState(false)
+	const [iconeStatus, setIconeStatus] = useState(icone_erro)
 
-function fazerQuestao(){
-	const botaoStatus = (botaoClicado || botaoNaoClicado)
-        if (botaoStatus) {
-            return
-        }
+
+	const iconeMudar = (botaoClicado ? seta_virar :
+		(!botaoNaoClicado ? seta_play :iconeStatus))
+
+	function fazerQuestao() {
+		
+		const botaoStatus = (botaoClicado || botaoNaoClicado)
+		if (botaoStatus) {
+
+			return
+		}
 		botaoClicado ? setBotaoClicado(false) : setBotaoClicado(true);
-}
+	}
+
+	function virarPergunta(){
+		if(!botaoClicado){
+			return
+		}else{
+			setQuestaoVirada(true)
+		}
+	}
 
 	return (
 
-		<Pergunta botaoClicado={botaoClicado}>
+		<Pergunta botaoClicado={botaoClicado} questaoVirada={questaoVirada} onClick={fazerQuestao}>
 			<Inicio botaoClicado={botaoClicado}>
-				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : `blaubau`}
+				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer: cards.question)}
 			</Inicio>
 
-			<ImagemInicial 
-			   botaoClicado={botaoClicado} > <img src={icone} alt="imagem" onClick={fazerQuestao}/> 
-				
-				</ImagemInicial>
+			<ImagemInicial
+				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta} />
+
+			</ImagemInicial>
 		</Pergunta>
 
 
@@ -51,9 +67,9 @@ margin:auto;
 	margin-bottom: 25px;
     width:300px;
     height:${props => props.botaoClicado ? "131px" : "65px;"};
-	background-color:white;
+	background-color:${props => props.botaoClicado ? "#FFFFD4" : "#FFFFFF"};
 	font-size: 20px;
-	font-weight: 700;
+	font-weight: 700;S
 
 `
 const Inicio = styled.div`
