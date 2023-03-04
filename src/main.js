@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Main(props) {
     const [respondidos, setRespondidos] = useState(0)
-    
+
 
     return (
         <Total>
@@ -17,7 +17,7 @@ export default function Main(props) {
 
             <Corpo>
 
-                {cards.map((cards , index) => (
+                {cards.map((cards, index) => (
                     <Perguntas
                         cards={cards}
                         perguntaIndex={index + 1}

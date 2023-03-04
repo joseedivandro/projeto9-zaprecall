@@ -11,22 +11,43 @@ import icone_quase from "./assets/icone_quase.png"
 
 export default function Perguntas(props) {
 
-	const { perguntaIndex, cards,  respondidos, setRespondidos, tamanhoCards, setTamanhoCards} = props
+	const { perguntaIndex, cards, respondidos, setRespondidos, tamanhoCards, setTamanhoCards, MudancaIcone, setMudancaIcone, } = props
 	const [botaoNaoClicado, setbotaoNaoClicado] = useState('')
 	const [botaoClicado, setBotaoClicado] = useState(false)
-	const [icone, setIcone] = useState(seta_play)
 	const [questaoVirada, setQuestaoVirada] = useState(false)
-	const [iconeStatus, setIconeStatus] = useState(icone_certo)
-	
+
+	const [SelecaoIcone, setSelecaoIcone] = useState(icone_erro)
+	const [CorSelecao, setCorSelecao] = useState('#333333')
+	const [DataTest, setDataTest] = useState("play-btn")
+
+
+	const tipoDeResposta = [
+		{
+			content: "Não lembrei",
+			tipo: "errado",
+			icone: "no-btn"
+		},
+		{
+			content: "Quase não lembrei",
+			tipo: "parcial",
+			icone: "partial-btn"
+		},
+		{
+			content: "Zap!",
+			tipo: "zap",
+			icone: "zap-btn"
+		}
+	]
+
 
 
 	const iconeMudar = (botaoClicado ? seta_virar :
-		(!botaoNaoClicado ? seta_play : iconeStatus))
+		(!botaoNaoClicado ? seta_play : SelecaoIcone))
 
 	function fazerQuestao() {
 
-		const botaoStatus = (botaoClicado || botaoNaoClicado)
-		if (botaoStatus) {
+		const botaotipo = (botaoClicado || botaoNaoClicado)
+		if (botaotipo) {
 
 			return
 		}
@@ -42,38 +63,69 @@ export default function Perguntas(props) {
 		}
 	}
 
-	function botaoVerdadeClicado(cor){
+	function botaoVerdadeClicado(tipo) {
 		setBotaoClicado(false)
 		setQuestaoVirada(false)
-		setRespondidos(respondidos+1)
-		setbotaoNaoClicado(cor)
-		
+		setRespondidos(respondidos + 1)
+		setbotaoNaoClicado(tipo)
 
-		if(respondidos+1 ===tamanhoCards){
+
+		if (respondidos + 1 === tamanhoCards) {
 			alert("acabous")
 		}
 
 
-		
+		const tipoFuncoes = {
+			'errado': () => {
+			  setSelecaoIcone(icone_erro)
+			  setCorSelecao('#FF3030')
+			  setDataTest("no-icon")
+			  setMudancaIcone([...MudancaIcone, icone_erro])
+			},
+			'parcial': () => {
+			  setSelecaoIcone(icone_quase)
+			  setCorSelecao('#FF922E')
+			  setDataTest("partial-icon")
+			  setMudancaIcone([...MudancaIcone, icone_quase])
+			},
+			'zap': () => {
+			  setSelecaoIcone(icone_certo)
+			  setCorSelecao('#2FBE34')
+			  setDataTest("zap-icon")
+			  setMudancaIcone([...MudancaIcone, icone_certo])
+			}
+		  }
+		  
+		  if (tipo in tipoFuncoes) {
+			tipoFuncoes[tipo]();
+		  }
+
+
 	}
 
 
 	return (
 
 		<Pergunta botaoClicado={botaoClicado} questaoVirada={questaoVirada} onClick={fazerQuestao} data-test="flashcard">
-			<Inicio botaoClicado={botaoClicado} data-test="flashcard-text">
+			<Inicio botaoClicado={botaoClicado} data-test="flashcard-text" CorSelecao={CorSelecao} botaoNaoClicado={botaoNaoClicado}>
 				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer : cards.question)}
 			</Inicio>
 
 			<ImagemInicial questaoVirada={questaoVirada}
-				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta} data-test="turn-btn"/>
+				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta}  data-test="turn-btn" />
 
 			</ImagemInicial>
 
 			<BotoesVerdade botaoClicado={botaoClicado} questaoVirada={questaoVirada}>
-				<button className="red" data-test="no-btn" onClick={botaoVerdadeClicado}>Não lembrei </button>
-				<button className="yellow" data-test="partial-btn" onClick={botaoVerdadeClicado }> Quase não lembrei</button>
-				<button className="green" data-test="zap-btn" onClick={botaoVerdadeClicado } > Zap!</button>
+				{tipoDeResposta.map((button, index) => (
+					<BotaoVerdade
+						data-test={button.icone}
+						key={index}
+						onClick={() => botaoVerdadeClicado(button.tipo)}
+					>
+						<p>{button.content}</p>
+					</BotaoVerdade>
+				))}
 			</BotoesVerdade>
 		</Pergunta>
 
@@ -106,6 +158,8 @@ const Inicio = styled.div`
 	
 	height:30px;
 	margin-left: 15px;
+	color: ${props => props.CorSelecao};
+	text-decoration: ${props => props.botaoNaoClicado ? "line-through" : "none"};
 
 `
 
@@ -119,30 +173,34 @@ display: ${props => props.questaoVirada ? "none" : "flex"};
 	}
 `
 
-const BotoesVerdade = styled.div`
+const BotaoVerdade = styled.button`
 
+
+	width: 85.17px;
+	height: 37.17px;
+	border-radius: 5px;
+	color: white;
+
+
+	
+
+`
+
+
+const BotoesVerdade = styled.div`
 display:${props => props.questaoVirada ? "flex" : "none"};
 justify-content: space-evenly;
 width: 100%;
 margin-top: 30px;
 
-
-button{
-	width: 85.17px;
-	height: 37.17px;
-	border-radius: 5px;
-	color: white;
-}
-
-.red{
+> button:nth-child(1) {
 	background: #FF3030;
 }
-
-.yellow{
+> button:nth-child(2) {
 	background: #FF922E;
 }
 
-.green{
+> button:nth-child(3) {
 	background: #2FBE34;
 }
 `
