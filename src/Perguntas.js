@@ -112,8 +112,8 @@ export default function Perguntas(props) {
 				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer : cards.question)}
 			</Inicio>
 
-			<ImagemInicial questaoVirada={questaoVirada}
-				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta}  data-test={DataTest} />
+			<ImagemInicial data-test={DataTest}   questaoVirada={questaoVirada}
+				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta}  />
 
 			</ImagemInicial>
 
