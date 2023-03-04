@@ -52,6 +52,7 @@ export default function Perguntas(props) {
 			return
 		}
 		botaoClicado ? setBotaoClicado(false) : setBotaoClicado(true);
+		DataTest("turn-btn")
 	}
 
 	function virarPergunta() {
@@ -112,7 +113,7 @@ export default function Perguntas(props) {
 			</Inicio>
 
 			<ImagemInicial questaoVirada={questaoVirada}
-				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta}  data-test="turn-btn" />
+				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta}  data-test={DataTest} />
 
 			</ImagemInicial>
 
