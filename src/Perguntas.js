@@ -43,20 +43,20 @@ export default function Perguntas(props) {
 
 	return (
 
-		<Pergunta botaoClicado={botaoClicado} questaoVirada={questaoVirada} onClick={fazerQuestao}>
-			<Inicio botaoClicado={botaoClicado}>
+		<Pergunta botaoClicado={botaoClicado} questaoVirada={questaoVirada} onClick={fazerQuestao} data-test="flashcard">
+			<Inicio botaoClicado={botaoClicado} data-test="flashcard-text">
 				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer : cards.question)}
 			</Inicio>
 
 			<ImagemInicial questaoVirada={questaoVirada}
-				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta} />
+				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta} data-test="turn-btn"/>
 
 			</ImagemInicial>
 
 			<BotoesVerdade botaoClicado={botaoClicado} questaoVirada={questaoVirada}>
-				<button className="red">Não lembrei </button>
-				<button className="yellow"> Quase não lembrei</button>
-				<button className="green"> Zap!</button>
+				<button className="red" data-test="no-btn">Não lembrei </button>
+				<button className="yellow" data-test="partial-btn"> Quase não lembrei</button>
+				<button className="green" data-test="zap-btn"> Zap!</button>
 			</BotoesVerdade>
 		</Pergunta>
 

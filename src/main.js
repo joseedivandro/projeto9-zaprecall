@@ -25,7 +25,7 @@ export default function Main(props) {
                 ))}
             </Corpo>
 
-            <Footer>
+            <Footer data-test="footer">
                 <p>  0/{cards.length} CONCLUÍDAS</p>
             </Footer>
         </Total>
@@ -40,8 +40,8 @@ export default function Main(props) {
 
 const Header = styled.div`
 height: 60px;
-background-color: blue;
-margin-top: 42px;
+
+
 display:flex;
 margin-bottom:25px;
 
@@ -65,9 +65,9 @@ img{
 `;
 
 const Corpo = styled.div`
-background-color: red;
-height: 600px;
-overflow-y: scroll;
+
+
+overflow-y: hidden;
 
 
 `;
@@ -79,12 +79,13 @@ margin: auto;
 width: 375px;
 background: #FB6B6B;
 border: 1px solid #DBDBDB
-height: 667px;
+
 `
 
 
 const Footer = styled.div`
-
+z-index: 1;
+position:fixed;
 display:flex;
 justify-content: center;
     align-items: center;
@@ -92,8 +93,8 @@ width: 375px;
 height: 70px;
 background: #FFFFFF;
 box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
-position:fixed;
-background-color: yellow;
+
+
 
 p{
     font-family: 'Recursive';
