@@ -2,9 +2,11 @@ import styled from "styled-components";
 import logo from "./assets/logo.png"
 import Perguntas from "./Perguntas";
 import cards from "./cards";
+import { useState } from "react";
 
 export default function Main(props) {
-
+    const [respondidos, setRespondidos] = useState(0)
+    
 
     return (
         <Total>
@@ -20,13 +22,15 @@ export default function Main(props) {
                         cards={cards}
                         perguntaIndex={index + 1}
                         tamanhoCards={cards.length}
+                        respondidos={respondidos}
+                        setRespondidos={setRespondidos}
                     />
 
                 ))}
             </Corpo>
 
             <Footer data-test="footer">
-                <p>  0/{cards.length} CONCLUÍDAS</p>
+                <p>  {respondidos}/{cards.length} CONCLUÍDAS</p>
             </Footer>
         </Total>
 
@@ -66,8 +70,8 @@ img{
 
 const Corpo = styled.div`
 
-
-overflow-y: hidden;
+height: 667px;
+overflow-y: scroll;
 
 
 `;

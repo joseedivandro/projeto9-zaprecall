@@ -3,7 +3,7 @@ import styled from "styled-components";
 import seta_play from "./assets/seta_play.png"
 import seta_virar from "./assets/seta_virar.png"
 import icone_erro from "./assets/icone_erro.png"
-import icone_perto from "./assets/icone_certo.png"
+import icone_certo from "./assets/icone_certo.png"
 import icone_quase from "./assets/icone_quase.png"
 
 
@@ -11,12 +11,13 @@ import icone_quase from "./assets/icone_quase.png"
 
 export default function Perguntas(props) {
 
-	const { perguntaIndex, cards } = props
+	const { perguntaIndex, cards,  respondidos, setRespondidos, tamanhoCards, setTamanhoCards} = props
 	const [botaoNaoClicado, setbotaoNaoClicado] = useState('')
 	const [botaoClicado, setBotaoClicado] = useState(false)
 	const [icone, setIcone] = useState(seta_play)
 	const [questaoVirada, setQuestaoVirada] = useState(false)
-	const [iconeStatus, setIconeStatus] = useState(icone_erro)
+	const [iconeStatus, setIconeStatus] = useState(icone_certo)
+	
 
 
 	const iconeMudar = (botaoClicado ? seta_virar :
@@ -41,6 +42,22 @@ export default function Perguntas(props) {
 		}
 	}
 
+	function botaoVerdadeClicado(cor){
+		setBotaoClicado(false)
+		setQuestaoVirada(false)
+		setRespondidos(respondidos+1)
+		setbotaoNaoClicado(cor)
+		
+
+		if(respondidos+1 ===tamanhoCards){
+			alert("acabous")
+		}
+
+
+		
+	}
+
+
 	return (
 
 		<Pergunta botaoClicado={botaoClicado} questaoVirada={questaoVirada} onClick={fazerQuestao} data-test="flashcard">
@@ -54,9 +71,9 @@ export default function Perguntas(props) {
 			</ImagemInicial>
 
 			<BotoesVerdade botaoClicado={botaoClicado} questaoVirada={questaoVirada}>
-				<button className="red" data-test="no-btn">Não lembrei </button>
-				<button className="yellow" data-test="partial-btn"> Quase não lembrei</button>
-				<button className="green" data-test="zap-btn"> Zap!</button>
+				<button className="red" data-test="no-btn" onClick={botaoVerdadeClicado}>Não lembrei </button>
+				<button className="yellow" data-test="partial-btn" onClick={botaoVerdadeClicado }> Quase não lembrei</button>
+				<button className="green" data-test="zap-btn" onClick={botaoVerdadeClicado } > Zap!</button>
 			</BotoesVerdade>
 		</Pergunta>
 
