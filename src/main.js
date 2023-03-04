@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function Main(props) {
     const [respondidos, setRespondidos] = useState(0)
+    const [mudancaIcone, setMudancaIcone] = useState([])
 
 
     return (
@@ -24,6 +25,8 @@ export default function Main(props) {
                         tamanhoCards={cards.length}
                         respondidos={respondidos}
                         setRespondidos={setRespondidos}
+                        mudancaIcone={mudancaIcone}
+                        setMudancaIcone={setMudancaIcone}
                     />
 
                 ))}

@@ -11,14 +11,13 @@ import icone_quase from "./assets/icone_quase.png"
 
 export default function Perguntas(props) {
 
-	const { perguntaIndex, cards, respondidos, setRespondidos, tamanhoCards, setTamanhoCards, MudancaIcone, setMudancaIcone, } = props
+	const { perguntaIndex, cards, respondidos, setRespondidos, tamanhoCards, setTamanhoCards, mudancaIcone, setMudancaIcone, } = props
 	const [botaoNaoClicado, setbotaoNaoClicado] = useState('')
 	const [botaoClicado, setBotaoClicado] = useState(false)
 	const [questaoVirada, setQuestaoVirada] = useState(false)
-
 	const [SelecaoIcone, setSelecaoIcone] = useState(icone_erro)
 	const [CorSelecao, setCorSelecao] = useState('#333333')
-	const [DataTest, setDataTest] = useState("play-btn")
+	const [dataTest, setDataTest] = useState("play-btn")
 
 
 	const tipoDeResposta = [
@@ -52,7 +51,7 @@ export default function Perguntas(props) {
 			return
 		}
 		botaoClicado ? setBotaoClicado(false) : setBotaoClicado(true);
-		DataTest("turn-btn")
+		setDataTest("turn-btn")
 	}
 
 	function virarPergunta() {
@@ -81,19 +80,19 @@ export default function Perguntas(props) {
 			  setSelecaoIcone(icone_erro)
 			  setCorSelecao('#FF3030')
 			  setDataTest("no-icon")
-			  setMudancaIcone([...MudancaIcone, icone_erro])
+			  setMudancaIcone([...mudancaIcone, icone_erro])
 			},
 			'parcial': () => {
 			  setSelecaoIcone(icone_quase)
 			  setCorSelecao('#FF922E')
 			  setDataTest("partial-icon")
-			  setMudancaIcone([...MudancaIcone, icone_quase])
+			  setMudancaIcone([...mudancaIcone, icone_quase])
 			},
 			'zap': () => {
 			  setSelecaoIcone(icone_certo)
 			  setCorSelecao('#2FBE34')
 			  setDataTest("zap-icon")
-			  setMudancaIcone([...MudancaIcone, icone_certo])
+			  setMudancaIcone([...mudancaIcone, icone_certo])
 			}
 		  }
 		  
@@ -112,7 +111,7 @@ export default function Perguntas(props) {
 				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer : cards.question)}
 			</Inicio>
 
-			<ImagemInicial data-test={DataTest}   questaoVirada={questaoVirada}
+			<ImagemInicial data-test={dataTest}   questaoVirada={questaoVirada}
 				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" onClick={virarPergunta}  />
 
 			</ImagemInicial>
