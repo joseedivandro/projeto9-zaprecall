@@ -27,6 +27,7 @@ export default function Main(props) {
                         setRespondidos={setRespondidos}
                         mudancaIcone={mudancaIcone}
                         setMudancaIcone={setMudancaIcone}
+                        key={index}
                     />
 
                 ))}
@@ -46,6 +47,7 @@ export default function Main(props) {
 
 
 const Header = styled.div`
+margin-top:12px;
 height: 60px;
 
 
@@ -56,7 +58,7 @@ margin-bottom:25px;
     color: white;
     font-family: 'Righteous';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 36px;
     line-height: 45px;
     display: flex;
@@ -66,6 +68,7 @@ margin-bottom:25px;
 img{
     width: 52px;
     height: 60px;
+    margin-left: 50px;
 
 }
 
@@ -73,8 +76,8 @@ img{
 
 const Corpo = styled.div`
 
-height: 667px;
-overflow-y: scroll;
+height: 850px;
+overflow-y: hidden;
 
 
 `;
@@ -91,8 +94,9 @@ border: 1px solid #DBDBDB
 
 
 const Footer = styled.div`
-z-index: 1;
 position:fixed;
+bottom: 0px;
+
 display:flex;
 justify-content: center;
     align-items: center;
@@ -109,7 +113,6 @@ p{
     font-size: 25px;
     line-height: 22px;  
     color: #333333;
-   
     font-style: normal;
 
 }

@@ -11,7 +11,7 @@ import icone_quase from "./assets/icone_quase.png"
 
 export default function Perguntas(props) {
 
-	const { perguntaIndex, cards, respondidos, setRespondidos, tamanhoCards, setTamanhoCards, mudancaIcone, setMudancaIcone, } = props
+	const { perguntaIndex, cards, respondidos, setRespondidos, tamanhoCards, mudancaIcone, setMudancaIcone, } = props
 	const [botaoNaoClicado, setbotaoNaoClicado] = useState('')
 	const [botaoClicado, setBotaoClicado] = useState(false)
 	const [questaoVirada, setQuestaoVirada] = useState(false)
@@ -77,28 +77,28 @@ export default function Perguntas(props) {
 
 		const tipoFuncoes = {
 			'errado': () => {
-			  setSelecaoIcone(icone_erro)
-			  setCorSelecao('#FF3030')
-			  setDataTest("no-icon")
-			  setMudancaIcone([...mudancaIcone, icone_erro])
+				setSelecaoIcone(icone_erro)
+				setCorSelecao('#FF3030')
+				setDataTest("no-icon")
+				setMudancaIcone([...mudancaIcone, icone_erro])
 			},
 			'parcial': () => {
-			  setSelecaoIcone(icone_quase)
-			  setCorSelecao('#FF922E')
-			  setDataTest("partial-icon")
-			  setMudancaIcone([...mudancaIcone, icone_quase])
+				setSelecaoIcone(icone_quase)
+				setCorSelecao('#FF922E')
+				setDataTest("partial-icon")
+				setMudancaIcone([...mudancaIcone, icone_quase])
 			},
 			'zap': () => {
-			  setSelecaoIcone(icone_certo)
-			  setCorSelecao('#2FBE34')
-			  setDataTest("zap-icon")
-			  setMudancaIcone([...mudancaIcone, icone_certo])
+				setSelecaoIcone(icone_certo)
+				setCorSelecao('#2FBE34')
+				setDataTest("zap-icon")
+				setMudancaIcone([...mudancaIcone, icone_certo])
 			}
-		  }
-		  
-		  if (tipo in tipoFuncoes) {
+		}
+
+		if (tipo in tipoFuncoes) {
 			tipoFuncoes[tipo]();
-		  }
+		}
 
 
 	}
@@ -108,11 +108,11 @@ export default function Perguntas(props) {
 
 		<Pergunta botaoClicado={botaoClicado} questaoVirada={questaoVirada} onClick={fazerQuestao} data-test="flashcard">
 			<Inicio botaoClicado={botaoClicado} data-test="flashcard-text" CorSelecao={CorSelecao} botaoNaoClicado={botaoNaoClicado}>
-				{!botaoClicado ? `pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer : cards.question)}
+				{!botaoClicado ? `Pergunta 0${perguntaIndex} ` : (questaoVirada ? cards.answer : cards.question)}
 			</Inicio>
 
-			<ImagemInicial   questaoVirada={questaoVirada}
-				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" data-test={dataTest}  onClick={virarPergunta}  />
+			<ImagemInicial questaoVirada={questaoVirada}
+				botaoClicado={botaoClicado} > <img src={iconeMudar} alt="imagem" data-test={dataTest} onClick={virarPergunta} />
 
 			</ImagemInicial>
 
@@ -148,11 +148,9 @@ margin:auto;
 	font-size: 20px;
 	font-weight: 700;
 	border-radius: 5px;
+	font-family: 'Recursive';
+	
 
-
-	>img{
-		
-	}
 `
 const Inicio = styled.div`
 	
@@ -161,28 +159,26 @@ const Inicio = styled.div`
 	color: ${props => props.CorSelecao};
 	text-decoration: ${props => props.botaoNaoClicado ? "line-through" : "none"};
 
+	>p{
+		
+	}
+
 `
 
 const ImagemInicial = styled.div`
 display: ${props => props.questaoVirada ? "none" : "flex"};
-
-
 	img{
 		margin-right: 22px;
-		
+		margin-top: ${props => props.botaoClicado ? "80px" : "0px"};
+		margin-left: ${props => props.botaoClicado ? "270px" : "0px"};
 	}
 `
 
 const BotaoVerdade = styled.button`
-
-
 	width: 85.17px;
 	height: 37.17px;
 	border-radius: 5px;
 	color: white;
-
-
-	
 
 `
 
@@ -191,7 +187,7 @@ const BotoesVerdade = styled.div`
 display:${props => props.questaoVirada ? "flex" : "none"};
 justify-content: space-evenly;
 width: 100%;
-margin-top: 30px;
+margin-top: 50px;
 
 > button:nth-child(1) {
 	background: #FF3030;
